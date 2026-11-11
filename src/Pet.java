@@ -37,8 +37,8 @@ public class Pet {
         return this.name.equals(otherPet.name)&&this.age==otherPet.age&&this.type.equals(otherPet.type)&&this.id==otherPet.id;
     }
     public String toString(){
-        String petReturnString="ID: "+id+"\tName: "+name+"\tAge: "+age+"\tType: "+type;
-        petReturnString+="Vaccinated: "+vaccinated+"\tAdopted: "+adopted;
+        String petReturnString="ID: "+this.getId()+"\tName: "+this.getName()+"\tAge: "+this.getAge()+"\tType: "+this.getType();
+        petReturnString+="Vaccinated: "+this.isVaccinated()+"\tAdopted: "+this.isAdopted();
         return petReturnString;
     }
     public void setAdopted(boolean adopted){
