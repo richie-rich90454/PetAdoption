@@ -36,4 +36,15 @@ public class Pet {
     public boolean equals(Pet otherPet){
         return this.name.equals(otherPet.name)&&this.age==otherPet.age&&this.type.equals(otherPet.type)&&this.id==otherPet.id;
     }
+    public String toString(){
+        String petReturnString="ID: "+id+"\tName: "+name+"\tAge: "+age+"\tType: "+type;
+        petReturnString+="Vaccinated: "+vaccinated+"\tAdopted: "+adopted;
+        return petReturnString;
+    }
+    public void setAdopted(boolean adopted){
+        this.adopted=adopted;
+    }
+    public void setVaccinated(boolean vaccinated){
+        this.vaccinated=vaccinated;
+    }
 }

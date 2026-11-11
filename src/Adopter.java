@@ -29,4 +29,7 @@ public class Adopter{
     public Application createApplication(Pet petChosen){
         return new Application(this, petChosen);
     }
+    public boolean equals(Adopter adopter){
+        return this.adoptedPets.equals(adopter.adoptedPets)&&this.age==adopter.age&&this.homeType.equals(adopter.homeType)&&this.password.equals(adopter.password);
+    }
 }

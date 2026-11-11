@@ -19,4 +19,11 @@ public class Staff{
     public String getPassword(){
         return password;
     }
+    public void approveAdoption(Application application, boolean approved){
+        application.setApproved(approved);
+    }
+    public void changePetStatus(Pet pet, boolean vaccinated, boolean adopted){
+        pet.setVaccinated(vaccinated);
+        pet.setAdopted(adopted);
+    }
 }
