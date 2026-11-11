@@ -33,4 +33,7 @@ public class Pet {
     public int getId(){
         return id;
     }
+    public boolean equals(Pet otherPet){
+        return this.name.equals(otherPet.name)&&this.age==otherPet.age&&this.type.equals(otherPet.type)&&this.id==otherPet.id;
+    }
 }
