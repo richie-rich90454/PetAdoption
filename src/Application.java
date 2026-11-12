@@ -24,7 +24,7 @@ public class Application{
         if (this==object){
             return true;
         }
-        if (object.getClass()!=this.getClass()){
+        if (object==null||object.getClass()!=this.getClass()){
             return false;
         }
         Application otherApplication=(Application)object;
