@@ -96,7 +96,7 @@ public class Main{
                 }
                 System.out.println("There are these pending applications: ");
                 for (int i=0;i<allPendingApplications.size();i++){
-                    System.out.print("["+(i+1)+"]"+allPendingApplications.get(i));
+                    System.out.println("["+(i+1)+"]"+allPendingApplications.get(i));
                 }
                 System.out.println("Which one do you want to process (enter a number between 1 and "+ allApplications.size()+" where 1 denotes the first application previously printed for instance): ");
                 int applicationIndex=Input.safeIntInput(1, allApplications.size())-1;
@@ -175,7 +175,7 @@ public class Main{
                     }
                 }
                 if (!petExists){
-                    System.out.print("Pet does not exist and is hence not adoptable.");
+                    System.out.println("Pet does not exist and is hence not adoptable.");
                 }
             }
             else if (userChoice==3){
