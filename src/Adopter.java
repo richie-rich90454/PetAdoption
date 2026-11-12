@@ -7,6 +7,7 @@ public class Adopter{
     private String homeType;
     private String password;
     public Adopter(String name, int age, String homeType, String password){
+        this.name=name;
         this.age=age;
         this.homeType=homeType;
         this.password=password;
@@ -35,5 +36,8 @@ public class Adopter{
     }
     public boolean equals(Adopter adopter){
         return this.adoptedPets.equals(adopter.adoptedPets)&&this.age==adopter.age&&this.homeType.equals(adopter.homeType)&&this.password.equals(adopter.password);
+    }
+    public String toString(){
+        return name+" (age "+age+") with a home type of "+homeType+" with "+(adoptedPets.size()+1)+" pets adopted";
     }
 }

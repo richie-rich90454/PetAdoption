@@ -18,13 +18,19 @@ public class Main{
 //        }
         //Second Unit Test
         Adopter adopter=new Adopter("John", 45, "Villa", "justtesting");
-        adopter.addPet(pets.get(0));
+//        adopter.addPet(pets.get(0));
         adopter.addPet(pets.get(1));
         adopter.addPet(pets.get(2));
-        //same input as
+        //same output as the output in the first unit test, which suggests that the adopter is able to hold/adopt animals properly
         for (Pet pet:adopter.getAdoptedPets()){
             System.out.println(pet);
         }
+        Application newApplicationCreated=adopter.createApplication(pets.get(0));
+        //proves all getters and setters in the related classes work given by output:
+            //ID: 1002	Name: William	Age: 4	Type: Labrador DogVaccinated: false	Adopted: false
+            //ID: 1003	Name: Joanna	Age: 5	Type: Brown CatVaccinated: false	Adopted: false
+            //adopter John (age 45) with a home type of Villa with 3 pets adopted wants to adopt pet Karel with ID 1001, an age of 8, a type of German Shepard Dog, and is not vaccinated
+        System.out.println(newApplicationCreated);
 //        System.out.println("==========\nPET ADOPTION CENTER\n==========");
 //        Scanner input=new Scanner(System.in);
 //        while(true){
