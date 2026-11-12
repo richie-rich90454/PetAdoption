@@ -70,12 +70,17 @@ public class Main{
                 }
                 System.out.print("Please enter the pet ID of the pet that you intend to vaccinate: ");
                 int petID=Input.safeIntInput();
+                boolean petExists=false;
                 for (Pet pet: defaultStaff.getPets()){
                     if (pet.getId()==petID){
                         defaultStaff.changePetStatus(pet, true, false);
                         System.out.println(pet.getName()+" is vaccinated.");
+                        petExists=true;
                         break;
                     }
+                }
+                if (!petExists){
+                    System.out.print("Pet not found and hence not vaccinated.");
                 }
             }
             else if (userChoice==3){
@@ -93,7 +98,7 @@ public class Main{
                 System.out.print("Do you want to approve that application (true/false): ");
                 boolean approvalStatus=defaultStaff.approveAdoption(allPendingApplications.get(applicationIndex), Input.safeBooleanInput());
                 if (!approvalStatus){
-                    System.out.println("Not approvable because the pet is not vaccinated and/or is already adopted.");
+                    System.out.println("Not approvable because the pet is not vaccinated or is already adopted.");
                 }
             }
         }
@@ -145,6 +150,26 @@ public class Main{
                     if (!pet.isAdopted()&&pet.isVaccinated()){
                         System.out.println(pet);
                     }
+                }
+                System.out.print("Please enter the pet ID of the pet that you intend to adopt: ");
+                int petID=Input.safeIntInput();
+                boolean petExists=false;
+                for (Pet pet: defaultStaff.getPets()){
+                    if (pet.getId()==petID){
+                        petExists=true;
+                        if (!pet.isAdopted()&&pet.isVaccinated()){
+                            Application newApplication=currentAdopter.createApplication(pet);
+                            allPendingApplications.add(newApplication);
+                            System.out.println("Application submitted for "+pet.getName()+". Waiting for staff review and approval.");
+                        }
+                        else{
+                            System.out.println("The pet is not avaialbe for adoption because it is not vaccinated or is already adopted.");
+                        }
+                        break;
+                    }
+                }
+                if (!petExists){
+                    System.out.print("Pet does not exist and is hence not adoptable.");
                 }
             }
         }
