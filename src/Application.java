@@ -2,7 +2,7 @@ public class Application{
     private Adopter adopter;
     private Pet pet;
     private boolean approved;
-    public  Application(Adopter adopter, Pet pet){
+    public Application(Adopter adopter, Pet pet){
         this.adopter=adopter;
         this.pet=pet;
     }
@@ -20,5 +20,8 @@ public class Application{
     }
     public boolean equals(Application application){
         return pet.equals(application.pet)&&adopter.equals(application.adopter);
+    }
+    public String toString(){
+        return adopter.getName()+" wants to adopt "+pet.toString();
     }
 }

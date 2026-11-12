@@ -1,15 +1,19 @@
 import java.util.ArrayList;
 
 public class Adopter{
+    private String name;
     private ArrayList<Pet> adoptedPets;
     private int age;
     private String homeType;
     private String password;
-    public Adopter(int age, String homeType, String password){
+    public Adopter(String name, int age, String homeType, String password){
         this.age=age;
         this.homeType=homeType;
         this.password=password;
-        this.adoptedPets=new ArrayList<>();
+        this.adoptedPets=new ArrayList<Pet>();
+    }
+    public String getName(){
+        return name;
     }
     public ArrayList<Pet> getAdoptedPets(){
         return this.adoptedPets;
