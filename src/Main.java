@@ -93,12 +93,12 @@ public class Main{
                 System.out.print("Do you want to approve that application (true/false): ");
                 boolean approvalStatus=defaultStaff.approveAdoption(allPendingApplications.get(applicationIndex), Input.safeBooleanInput());
                 if (!approvalStatus){
-                    System.out.println("Not approvable because the animal is not vaccinated and/or is already adopted.");
+                    System.out.println("Not approvable because the pet is not vaccinated and/or is already adopted.");
                 }
             }
         }
     }
-    public static void adopterActions(ArrayList<Adopter> adopters){
+    public static void adopterActions(ArrayList<Adopter> adopters, Staff defaultStaff){
         Adopter currentAdopter=null;
         while (true){
             System.out.print("Please enter your username: ");
@@ -124,7 +124,29 @@ public class Main{
         }
         System.out.println("Welcome, "+currentAdopter.getName()+"!\n");
         while (true){
-
+            System.out.println("[1] View available pets");
+            System.out.println("[2] Submit an adoption application");
+            System.out.println("[3] Check my application status");
+            System.out.println("[4] Exit to login");
+            System.out.print("Choose an option (1-4): ");
+            int userChoice=Input.safeIntInput(1,4);
+            if (userChoice==4){
+                break;
+            }
+            else if (userChoice==1){
+                for (Pet pet: defaultStaff.getPets()){
+                    if (!pet.isAdopted()&&pet.isVaccinated()){
+                        System.out.println(pet);
+                    }
+                }
+            }
+            else if (userChoice==2){
+                for (Pet pet: defaultStaff.getPets()){
+                    if (!pet.isAdopted()&&pet.isVaccinated()){
+                        System.out.println(pet);
+                    }
+                }
+            }
         }
     }
     public static void main(String[] arg){
@@ -150,7 +172,7 @@ public class Main{
                 staffActions(defaultStaff);
             }
             else if (userRole.equals("adopter")){
-                adopterActions(adopters);
+                adopterActions(adopters, defaultStaff);
             }
             else if (userRole.equals("quit")){
                 return;
