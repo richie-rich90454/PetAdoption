@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Staff{
@@ -21,7 +20,11 @@ public class Staff{
         return password;
     }
     public void approveAdoption(Application application, boolean approved){
-        application.setApproved(approved);
+        if (approved){
+            application.setApprovalStatus("APPROVED");
+            return;
+        }
+        application.setApprovalStatus("REJECTED");
     }
     public void changePetStatus(Pet pet, boolean vaccinated, boolean adopted){
         pet.setVaccinated(vaccinated);

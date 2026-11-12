@@ -1,16 +1,17 @@
 public class Application{
     private Adopter adopter;
     private Pet pet;
-    private boolean approved;
+    private String approvalStatus;
     public Application(Adopter adopter, Pet pet){
         this.adopter=adopter;
         this.pet=pet;
+        approvalStatus="PENDING";
     }
-    public void setApproved(boolean approved){
-        this.approved=approved;
+    public void setApprovalStatus(String approvalStatus){
+        this.approvalStatus=approvalStatus;
     }
-    public boolean isApproved(){
-        return approved;
+    public String getApprovalStatus(){
+        return approvalStatus;
     }
     public Pet getPet(){
         return pet;
