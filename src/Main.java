@@ -99,9 +99,11 @@ public class Main{
         }
     }
     public static void adopterActions(ArrayList<Adopter> adopters){
+        Adopter currentAdopter=null;
         while (true){
             System.out.print("Please enter your username: ");
             String username=Input.safeStringInput().toLowerCase();
+            boolean adopterExists=false;
             for (Adopter adopter: adopters){
                 if (adopter.getName().toLowerCase().equals(username)){
                     System.out.print("Please enter your password: ");
@@ -110,9 +112,19 @@ public class Main{
                         System.out.print("Wrong Password. Please enter again: ");
                         userPassword=Input.safeStringInput();
                     }
+                    currentAdopter=adopter;
+                    adopterExists=true;
+                    break;
                 }
             }
+            if (adopterExists){
+                break;
+            }
             System.out.print("Adopter not found.");
+        }
+        System.out.println("Welcome, "+currentAdopter.getName()+"!\n");
+        while (true){
+
         }
     }
     public static void main(String[] arg){
