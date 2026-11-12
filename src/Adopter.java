@@ -38,6 +38,6 @@ public class Adopter{
         return this.adoptedPets.equals(adopter.adoptedPets)&&this.age==adopter.age&&this.homeType.equals(adopter.homeType)&&this.password.equals(adopter.password);
     }
     public String toString(){
-        return name+" (age "+age+") with a home type of "+homeType+" with "+(adoptedPets.size()+1)+" pets adopted";
+        return name+" (age "+age+") with a home type of "+homeType+" with "+adoptedPets.size()+" pets adopted";
     }
 }

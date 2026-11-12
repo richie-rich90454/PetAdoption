@@ -1,8 +1,7 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Main{
-    public static ArrayList<Application> allPendingApplications=new ArrayList<Application>();
+    public static ArrayList<Application> allApplications =new ArrayList<Application>();
     public static void firstUnitTest(){
         //        //First Unit Test
         ArrayList<Pet> pets=new ArrayList<Pet>();
@@ -47,6 +46,7 @@ public class Main{
             if (userPassword.equals(defaultStaff.getPassword())){
                 break;
             }
+            System.out.println("Wrong password. Please enter again: ");
         }
         System.out.println("Welcome, Shelter Staff!\n");
         while (true){
@@ -73,30 +73,36 @@ public class Main{
                 boolean petExists=false;
                 for (Pet pet: defaultStaff.getPets()){
                     if (pet.getId()==petID){
-                        defaultStaff.changePetStatus(pet, true, false);
+                        defaultStaff.changePetStatus(pet, true, pet.isAdopted());
                         System.out.println(pet.getName()+" is vaccinated.");
                         petExists=true;
                         break;
                     }
                 }
                 if (!petExists){
-                    System.out.print("Pet not found and hence not vaccinated.");
+                    System.out.println("Pet not found and hence not vaccinated.");
                 }
             }
             else if (userChoice==3){
-                System.out.println("There are these pending applications");
-                for (Application application: allPendingApplications){
-                    System.out.print(application);
+                ArrayList<Application> allPendingApplications=new ArrayList<Application>();
+                for (Application application: allApplications){
+                    if (application.getApprovalStatus().equals("PENDING")){
+                        allPendingApplications.add(application);
+                    }
                 }
                 if (allPendingApplications.size()==0){
                     System.out.println("There are no pending applications.");
                     continue;
                 }
-                System.out.print("Which one do you want to process (enter a number between 1 and "+allPendingApplications.size()+" where 1 denotes the first application previously printed for instance): ");
-                int applicationIndex=Input.safeIntInput(1, allPendingApplications.size())-1;
-                System.out.println("Should the application be approved according to the algorithm: "+allPendingApplications.get(applicationIndex).isAllowedToAdopt());
+                System.out.println("There are these pending applications: ");
+                for (int i=0;i<allPendingApplications.size();i++){
+                    System.out.print("["+(i+1)+"]"+allPendingApplications.get(i));
+                }
+                System.out.println("Which one do you want to process (enter a number between 1 and "+ allApplications.size()+" where 1 denotes the first application previously printed for instance): ");
+                int applicationIndex=Input.safeIntInput(1, allApplications.size())-1;
+                System.out.println("Should the application be approved according to the algorithm: "+ allApplications.get(applicationIndex).isAllowedToAdopt());
                 System.out.print("Do you want to approve that application (true/false): ");
-                boolean approvalStatus=defaultStaff.approveAdoption(allPendingApplications.get(applicationIndex), Input.safeBooleanInput());
+                boolean approvalStatus=defaultStaff.approveAdoption(allApplications.get(applicationIndex), Input.safeBooleanInput());
                 if (!approvalStatus){
                     System.out.println("Not approvable because the pet is not vaccinated or is already adopted.");
                 }
@@ -159,11 +165,11 @@ public class Main{
                         petExists=true;
                         if (!pet.isAdopted()&&pet.isVaccinated()){
                             Application newApplication=currentAdopter.createApplication(pet);
-                            allPendingApplications.add(newApplication);
+                            allApplications.add(newApplication);
                             System.out.println("Application submitted for "+pet.getName()+". Waiting for staff review and approval.");
                         }
                         else{
-                            System.out.println("The pet is not avaialbe for adoption because it is not vaccinated or is already adopted.");
+                            System.out.println("The pet is not available for adoption because it is not vaccinated or is already adopted.");
                         }
                         break;
                     }
@@ -174,7 +180,7 @@ public class Main{
             }
             else if (userChoice==3){
                 boolean hasAdoptions=false;
-                for (Application application: allPendingApplications){
+                for (Application application: allApplications){
                     if (application.getAdopter().equals(currentAdopter)){
                         System.out.println(application);
                         hasAdoptions=true;

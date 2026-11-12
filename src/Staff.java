@@ -24,8 +24,18 @@ public class Staff{
             application.setApprovalStatus("APPROVED");
             this.changePetStatus(application.getPet(), application.getPet().isVaccinated(), true);
             application.getAdopter().addPet(application.getPet());
-//            Main.allPendingApplications.remove(application);
+//            Main.allApplications.remove(application);
             return true;
+        }
+        else if (!approved&&application.isAllowedToAdopt()){
+            return true;
+        }
+        //auto-reject other applications for the same pet once this one is done
+        for (Application otherApplication: applications){
+            if (!otherApplication.equals(application)&&otherApplication.getPet().equals(application.getPet())&&otherApplication.getApprovalStatus().equals("PENDING")){
+                otherApplication.setApprovalStatus("REJECTED");
+                System.out.println("Conflicting application from "+otherApplication.getAdopter().getName()+" automatically rejected.");
+            }
         }
         application.setApprovalStatus("REJECTED");
         return false;

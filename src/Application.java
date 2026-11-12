@@ -31,7 +31,7 @@ public class Application{
         return (pet.equals(otherApplication.pet)&&adopter.equals(otherApplication.adopter));
     }
     public String toString(){
-        String adopterMessage="adopter "+adopter.toString()+" wants to adopt pet "+pet.getName()+" (ID "+pet.getId()+", age "+pet.getAge()+", "+pet.getType();
+        String adopterMessage="["+approvalStatus+"] adopter "+adopter.toString()+" wants to adopt pet "+pet.getName()+" (ID "+pet.getId()+", age "+pet.getAge()+", "+pet.getType();
         if (pet.isVaccinated()){
             adopterMessage+=", is vaccinated";
         }
@@ -44,6 +44,7 @@ public class Application{
         else{
             adopterMessage+=", is not adopted";
         }
+        adopterMessage+=")";
         return adopterMessage;
     }
     public int getRecommendationScore(){
