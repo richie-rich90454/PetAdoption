@@ -42,7 +42,14 @@ public class Main{
     }
     public static void staffActions(Staff defaultStaff){
         while (true){
-            System.out.println("Welcome, Shelter Staff!\n");
+            System.out.print("Please enter your password: ");
+            String userPassword=Input.safeStringInput();
+            if (userPassword.equals(defaultStaff.getPassword())){
+                break;
+            }
+        }
+        System.out.println("Welcome, Shelter Staff!\n");
+        while (true){
             System.out.println("[1] View all pets");
             System.out.println("[2] Vaccinate a pet");
             System.out.println("[3] Process adoption application");
@@ -91,6 +98,9 @@ public class Main{
             }
         }
     }
+    public static void adopterActions(ArrayList<Adopter> adopters){
+
+    }
     public static void main(String[] arg){
         ArrayList<Pet> pets=new ArrayList<Pet>();
 //        firstUnitTest();
@@ -100,10 +110,11 @@ public class Main{
         pets.add(new Pet("Joanna", 5, "Brown Cat"));
         Staff defaultStaff=new Staff("Staff", "StaffPassword");
         defaultStaff.addPets(pets);
-        Adopter johnAdopter=new Adopter("John", 45, "Villa", "johnplayswhat");
-        Adopter fredAdopter=new Adopter("Fred", 19, "Apartment", "fredplayswhat");
-        johnAdopter.addPet(pets.get(1));
-        johnAdopter.addPet(pets.get(2));
+        ArrayList<Adopter> adopters=new ArrayList<Adopter>();
+        adopters.add(new Adopter("John", 45, "Villa", "johnplayswhat"));
+        adopters.add(new Adopter("Fred", 19, "Apartment", "fredplayswhat"));
+        adopters.get(0).addPet(pets.get(1));
+        adopters.get(1).addPet(pets.get(2));
         System.out.println("==========\nPET ADOPTION CENTER\n==========");
         while(true){
             System.out.println("Login or switch roles at any time.");
@@ -113,7 +124,7 @@ public class Main{
                 staffActions(defaultStaff);
             }
             else if (userRole.equals("adopter")){
-
+                adopterActions(adopters);
             }
             else if (userRole.equals("quit")){
                 return;
