@@ -19,8 +19,16 @@ public class Application{
     public Adopter getAdopter(){
         return adopter;
     }
-    public boolean equals(Application application){
-        return pet.equals(application.pet)&&adopter.equals(application.adopter);
+    @Override
+    public boolean equals(Object object){
+        if (this==object){
+            return true;
+        }
+        if (object.getClass()!=this.getClass()){
+            return false;
+        }
+        Application otherApplication=(Application)object;
+        return (pet.equals(otherApplication.pet)&&adopter.equals(otherApplication.adopter));
     }
     public String toString(){
         String adopterMessage="adopter "+adopter.toString()+" wants to adopt pet "+pet.getName()+" (ID "+pet.getId()+", age "+pet.getAge()+", "+pet.getType();
