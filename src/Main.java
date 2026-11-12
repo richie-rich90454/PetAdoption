@@ -2,6 +2,53 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main{
+    public static Scanner input=new Scanner(System.in);
+    public static ArrayList<Application> allPendingApplications=new ArrayList<Application>();
+    public static void staffActions(Staff defaultStaff){
+        while (true){
+            System.out.println("Welcome, Shelter Staff!\n");
+            System.out.println("[1] View all pets");
+            System.out.println("[2] Vaccinate a pet");
+            System.out.println("[3] Process adoption application");
+            System.out.println("[4] Exit to login");
+            System.out.print("Choose an option (1-4): ");
+            int userChoice=input.nextInt();
+            if(userChoice==4){
+                break;
+            }
+            else if (userChoice==1){
+                for (Pet pet: defaultStaff.getPets()){
+                    System.out.println(pet);
+                }
+            }
+            else if (userChoice==2){
+                for (Pet pet: defaultStaff.getPets()){
+                    System.out.println(pet);
+                }
+                System.out.print("Please enter the pet ID of the pet that you intend to vaccinate: ");
+                int petID=input.nextInt();
+                for (Pet pet: defaultStaff.getPets()){
+                    if (pet.getId()==petID){
+                        defaultStaff.changePetStatus(pet, true, false);
+                        System.out.println(pet.getName()+" is vaccinated.");
+                        break;
+                    }
+                }
+            }
+            else if (userChoice==3){
+                System.out.println("There are these pending applications");
+                for (Application application: allPendingApplications){
+                    System.out.print(application);
+                }
+                System.out.print("Which one do you want to process (enter a number between 1 and "+allPendingApplications.size()+" where 1 denotes the first application previously printed for instance): ");
+                int applicationID=input.nextInt();
+                System.out.print("Do you want to approve that application (true/false): ");
+
+                boolean approvalStatus=input.nextBoolean();
+
+            }
+        }
+    }
     public static void main(String[] arg){
 //        //First Unit Test
         ArrayList<Pet> pets=new ArrayList<Pet>();
@@ -17,6 +64,8 @@ public class Main{
 //            System.out.println(pet);
 //        }
         //Second Unit Test
+        Staff defaultStaff=new Staff("Staff", "StaffPassword");
+        defaultStaff.addPets(pets);
         Adopter johnAdopter=new Adopter("John", 45, "Villa", "johnplayswhat");
         Adopter fredAdopter=new Adopter("Fred", 19, "Apartment", "fredplayswhat");
         johnAdopter.addPet(pets.get(1));
@@ -31,26 +80,20 @@ public class Main{
             //ID: 1003	Name: Joanna	Age: 5	Type: Brown CatVaccinated: false	Adopted: false
             //adopter John (age 45) with a home type of Villa with 3 pets adopted wants to adopt pet Karel with ID 1001, an age of 8, a type of German Shepard Dog, and is not vaccinated
 //        System.out.println(newApplicationCreated);
-//        System.out.println("==========\nPET ADOPTION CENTER\n==========");
-//        Scanner input=new Scanner(System.in);
-//        while(true){
-//            System.out.println("Login or switch roles at any time.");
-//            System.out.print("Enter role (staff/adopter/quit): ");
-//            String userRole=input.nextLine().trim().toLowerCase();
-//            if (userRole.equals("staff")){
-//                System.out.println("Welcome, Shelter Staff!\n");
-//                System.out.println("[1] View all pets");
-//                System.out.println("[2] Vaccinate a pet");
-//                System.out.println("[3] Process adoption application");
-//                System.out.println("[4] Exit to login");
-//                System.out.print("Choose an option (1-4): ");
-//            }
-//            else if (userRole.equals("adopter")){
-//
-//            }
-//            else if (userRole.equals("quit")){
-//                return;
-//            }
-//        }
+        System.out.println("==========\nPET ADOPTION CENTER\n==========");
+        while(true){
+            System.out.println("Login or switch roles at any time.");
+            System.out.print("Enter role (staff/adopter/quit): ");
+            String userRole=input.nextLine().trim().toLowerCase();
+            if (userRole.equals("staff")){
+                staffActions(defaultStaff);
+            }
+            else if (userRole.equals("adopter")){
+
+            }
+            else if (userRole.equals("quit")){
+                return;
+            }
+        }
     }
 }

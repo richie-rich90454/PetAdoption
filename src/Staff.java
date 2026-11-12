@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Staff{
@@ -25,5 +26,11 @@ public class Staff{
     public void changePetStatus(Pet pet, boolean vaccinated, boolean adopted){
         pet.setVaccinated(vaccinated);
         pet.setAdopted(adopted);
+    }
+    public void addPets(ArrayList<Pet> pets){
+        this.pets.addAll(pets);
+    }
+    public ArrayList<Pet> getPets(){
+        return pets;
     }
 }

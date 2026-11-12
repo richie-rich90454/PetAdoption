@@ -31,4 +31,8 @@ public class Application{
         }
         return adopterMessage;
     }
+    public boolean adoptOrNotRecommendation(){
+        int recommendationIndex=0;
+
+    }
 }

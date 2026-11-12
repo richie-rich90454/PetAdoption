@@ -38,7 +38,7 @@ public class Pet {
     }
     public String toString(){
         String petReturnString="ID: "+this.getId()+"\tName: "+this.getName()+"\tAge: "+this.getAge()+"\tType: "+this.getType();
-        petReturnString+="Vaccinated: "+this.isVaccinated()+"\tAdopted: "+this.isAdopted();
+        petReturnString+="\tVaccinated: "+this.isVaccinated()+"\tAdopted: "+this.isAdopted();
         return petReturnString;
     }
     public void setAdopted(boolean adopted){
