@@ -19,14 +19,16 @@ public class Staff{
     public String getPassword(){
         return password;
     }
-    public void approveAdoption(Application application, boolean approved){
+    public boolean approveAdoption(Application application, boolean approved){
         if (approved&&application.isAllowedToAdopt()){
             application.setApprovalStatus("APPROVED");
             this.changePetStatus(application.getPet(), application.getPet().isVaccinated(), true);
             application.getAdopter().addPet(application.getPet());
-            return;
+            Main.allPendingApplications.remove(application);
+            return true;
         }
         application.setApprovalStatus("REJECTED");
+        return false;
     }
     public void changePetStatus(Pet pet, boolean vaccinated, boolean adopted){
         pet.setVaccinated(vaccinated);

@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main{
-    public static Scanner input=new Scanner(System.in);
     public static ArrayList<Application> allPendingApplications=new ArrayList<Application>();
     public static void firstUnitTest(){
         //        //First Unit Test
@@ -49,7 +48,7 @@ public class Main{
             System.out.println("[3] Process adoption application");
             System.out.println("[4] Exit to login");
             System.out.print("Choose an option (1-4): ");
-            int userChoice=input.nextInt();
+            int userChoice=Input.safeIntInput(1,4);
             if(userChoice==4){
                 break;
             }
@@ -63,7 +62,7 @@ public class Main{
                     System.out.println(pet);
                 }
                 System.out.print("Please enter the pet ID of the pet that you intend to vaccinate: ");
-                int petID=input.nextInt();
+                int petID=Input.safeIntInput();
                 for (Pet pet: defaultStaff.getPets()){
                     if (pet.getId()==petID){
                         defaultStaff.changePetStatus(pet, true, false);
@@ -77,12 +76,18 @@ public class Main{
                 for (Application application: allPendingApplications){
                     System.out.print(application);
                 }
+                if (allPendingApplications.size()==0){
+                    System.out.println("There are no pending applications.");
+                    continue;
+                }
                 System.out.print("Which one do you want to process (enter a number between 1 and "+allPendingApplications.size()+" where 1 denotes the first application previously printed for instance): ");
-                int applicationIndex=input.nextInt();
+                int applicationIndex=Input.safeIntInput(1, allPendingApplications.size())-1;
                 System.out.println("Should the application be approved according to the algorithm: "+allPendingApplications.get(applicationIndex).isAllowedToAdopt());
                 System.out.print("Do you want to approve that application (true/false): ");
-                boolean approvalStatus=input.nextBoolean();
-
+                boolean approvalStatus=defaultStaff.approveAdoption(allPendingApplications.get(applicationIndex), Input.safeBooleanInput());
+                if (!approvalStatus){
+                    System.out.println("Not approvable because the animal is not vaccinated and/or is already adopted.");
+                }
             }
         }
     }
@@ -103,7 +108,7 @@ public class Main{
         while(true){
             System.out.println("Login or switch roles at any time.");
             System.out.print("Enter role (staff/adopter/quit): ");
-            String userRole=input.nextLine().trim().toLowerCase();
+            String userRole=Input.safeStringInput().toLowerCase();
             if (userRole.equals("staff")){
                 staffActions(defaultStaff);
             }
