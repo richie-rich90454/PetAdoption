@@ -23,12 +23,18 @@ public class Application{
         return pet.equals(application.pet)&&adopter.equals(application.adopter);
     }
     public String toString(){
-        String adopterMessage="adopter "+adopter.toString()+" wants to adopt pet "+pet.getName()+" with ID "+pet.getId()+", an age of "+pet.getAge()+", a type of "+pet.getType();
+        String adopterMessage="adopter "+adopter.toString()+" wants to adopt pet "+pet.getName()+" (ID "+pet.getId()+", age "+pet.getAge()+", "+pet.getType();
         if (pet.isVaccinated()){
-            adopterMessage+=", and is vaccinated";
+            adopterMessage+=", is vaccinated";
         }
         else{
-            adopterMessage+=", and is not vaccinated";
+            adopterMessage+=", is not vaccinated";
+        }
+        if (pet.isAdopted()){
+            adopterMessage+=", is adopted";
+        }
+        else{
+            adopterMessage+=", is not adopted";
         }
         return adopterMessage;
     }
