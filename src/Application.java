@@ -32,31 +32,39 @@ public class Application{
         }
         return adopterMessage;
     }
-    public boolean adoptOrNotRecommendation(){
-        int recommendationIndex=0;//0-50=not recommend, 50-75=conditional, 75-100=recommend
-        if (pet.isVaccinated()==false){
-            return false;
-        }
+    public int getRecommendationScore(){
+        int recommendationScore=0;//0-50=not recommend, 50-75=recommend with range 0-75
         if (adopter.getAdoptedPets().size()>=1){
-            recommendationIndex+=25;
+            recommendationScore+=25;
         }
         else{
-            recommendationIndex+=10;
+            recommendationScore+=10;
         }
         if (adopter.getHomeType().toLowerCase().trim().equals("villa")||adopter.getHomeType().toLowerCase().trim().equals("apartment")||adopter.getHomeType().toLowerCase().trim().equals("townhouse")){
-            recommendationIndex+=25;
+            recommendationScore+=25;
         }
         else{
-            recommendationIndex+=10;
+            recommendationScore+=10;
         }
         if (adopter.getAge()<=35&&adopter.getAge()>=18){
-            recommendationIndex+=25;
+            recommendationScore+=25;
         }
-        else if (adopter.getAge()>=35){
-            recommendationIndex+=15;
+        else if (adopter.getAge()>35){
+            recommendationScore+=15;
         }
         else{
-            recommendationIndex+=5;
+            recommendationScore+=5;
+        }
+        return recommendationScore;
+    }
+    public boolean isAllowedToAdopt(){
+        if (!pet.isVaccinated()){
+            if (!pet.isAdopted()){
+                if (getRecommendationScore()>=50){
+                    return true;
+                }
+            }
+
         }
         return false;
     }
