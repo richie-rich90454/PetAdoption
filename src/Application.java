@@ -72,13 +72,12 @@ public class Application{
         return recommendationScore;
     }
     public boolean isAllowedToAdopt(){
-        if (!pet.isVaccinated()){
+        if (pet.isVaccinated()){
             if (!pet.isAdopted()){
                 if (getRecommendationScore()>=50){
                     return true;
                 }
             }
-
         }
         return false;
     }

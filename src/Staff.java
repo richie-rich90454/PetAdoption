@@ -20,8 +20,10 @@ public class Staff{
         return password;
     }
     public void approveAdoption(Application application, boolean approved){
-        if (approved){
+        if (approved&&application.isAllowedToAdopt()){
             application.setApprovalStatus("APPROVED");
+            this.changePetStatus(application.getPet(), application.getPet().isVaccinated(), true);
+            application.getAdopter().addPet(application.getPet());
             return;
         }
         application.setApprovalStatus("REJECTED");
