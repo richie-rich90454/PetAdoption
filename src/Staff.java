@@ -24,7 +24,7 @@ public class Staff{
             application.setApprovalStatus("APPROVED");
             this.changePetStatus(application.getPet(), application.getPet().isVaccinated(), true);
             application.getAdopter().addPet(application.getPet());
-            Main.allPendingApplications.remove(application);
+//            Main.allPendingApplications.remove(application);
             return true;
         }
         application.setApprovalStatus("REJECTED");

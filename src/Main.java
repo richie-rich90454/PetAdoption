@@ -172,6 +172,18 @@ public class Main{
                     System.out.print("Pet does not exist and is hence not adoptable.");
                 }
             }
+            else if (userChoice==3){
+                boolean hasAdoptions=false;
+                for (Application application: allPendingApplications){
+                    if (application.getAdopter().equals(currentAdopter)){
+                        System.out.println(application);
+                        hasAdoptions=true;
+                    }
+                }
+                if (!hasAdoptions){
+                    System.out.println("You have not adopted any pets before.");
+                }
+            }
         }
     }
     public static void main(String[] arg){
