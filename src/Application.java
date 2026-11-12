@@ -32,7 +32,31 @@ public class Application{
         return adopterMessage;
     }
     public boolean adoptOrNotRecommendation(){
-        int recommendationIndex=0;
-
+        int recommendationIndex=0;//0-50=not recommend, 50-75=conditional, 75-100=recommend
+        if (pet.isVaccinated()==false){
+            return false;
+        }
+        if (adopter.getAdoptedPets().size()>=1){
+            recommendationIndex+=25;
+        }
+        else{
+            recommendationIndex+=10;
+        }
+        if (adopter.getHomeType().toLowerCase().trim().equals("villa")||adopter.getHomeType().toLowerCase().trim().equals("apartment")||adopter.getHomeType().toLowerCase().trim().equals("townhouse")){
+            recommendationIndex+=25;
+        }
+        else{
+            recommendationIndex+=10;
+        }
+        if (adopter.getAge()<=35&&adopter.getAge()>=18){
+            recommendationIndex+=25;
+        }
+        else if (adopter.getAge()>=35){
+            recommendationIndex+=15;
+        }
+        else{
+            recommendationIndex+=5;
+        }
+        return false;
     }
 }

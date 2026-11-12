@@ -41,9 +41,9 @@ public class Main{
                     System.out.print(application);
                 }
                 System.out.print("Which one do you want to process (enter a number between 1 and "+allPendingApplications.size()+" where 1 denotes the first application previously printed for instance): ");
-                int applicationID=input.nextInt();
+                int applicationIndex=input.nextInt();
+                System.out.println("Should the application be approved according to the algorithm: "+allPendingApplications.get(applicationIndex).adoptOrNotRecommendation());
                 System.out.print("Do you want to approve that application (true/false): ");
-
                 boolean approvalStatus=input.nextBoolean();
 
             }
