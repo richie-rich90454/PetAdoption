@@ -99,7 +99,21 @@ public class Main{
         }
     }
     public static void adopterActions(ArrayList<Adopter> adopters){
-
+        while (true){
+            System.out.print("Please enter your username: ");
+            String username=Input.safeStringInput().toLowerCase();
+            for (Adopter adopter: adopters){
+                if (adopter.getName().toLowerCase().equals(username)){
+                    System.out.print("Please enter your password: ");
+                    String userPassword=Input.safeStringInput();
+                    while (!userPassword.equals(adopter.getPassword())){
+                        System.out.print("Wrong Password. Please enter again: ");
+                        userPassword=Input.safeStringInput();
+                    }
+                }
+            }
+            System.out.print("Adopter not found.");
+        }
     }
     public static void main(String[] arg){
         ArrayList<Pet> pets=new ArrayList<Pet>();
