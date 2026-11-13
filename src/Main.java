@@ -18,12 +18,15 @@
     Contribution Log
     Since this is an individual project, Richard solely completed all classes, implemented all methods, wrote the unit tests, created the UML diagrams, and created the demo video.
  */
+/*
+    See TestResults.txt for the test case output (all test outputs are as expected)
+    See SampleOutput.txt for an example flow and execution of the program
+ */
 import java.util.ArrayList;
-
 public class Main{
     public static ArrayList<Application> allApplications=new ArrayList<Application>();
     public static void firstUnitTest(){
-//        First Unit Test
+        //First Unit Test
         System.out.println("First unit test");
         ArrayList<Pet> pets=new ArrayList<Pet>();
         pets.add(new Pet("Karel", 8, "German Shepard Dog"));
@@ -62,18 +65,99 @@ public class Main{
         }
         Application newApplicationCreated=johnAdopter.createApplication(pets.get(0));
         //proves all getters and setters in the related classes (the Adopter and the Pet class as well as the Application class) work given by output:
-        //ID: 1002	Name: William	Age: 4	Type: Labrador DogVaccinated: false	Adopted: false
-        //ID: 1003	Name: Joanna	Age: 5	Type: Brown CatVaccinated: false	Adopted: false
-        //adopter John (age 45) with a home type of Villa with 3 pets adopted wants to adopt pet Karel with ID 1001, an age of 8, a type of German Shepard Dog, and is not vaccinated
+        //adopter John (age 45) with a home type of Villa with 2 pets adopted wants to adopt pet Karel (ID 1001, age 8, German Shepard Dog, is not vaccinated, is not adopted)
         System.out.println(newApplicationCreated);
-        //test recommendation status for the adoption (expect false in this case because it is not vaccinated)
+        //expect false because the pet is not vaccinated
         System.out.println(newApplicationCreated.isAllowedToAdopt());
         defaultStaff.changePetStatus(pets.get(0), true, false);
-        //test recommendation status for the adoption (expect true in this case, as the pet is vaccinated)
+        //expect true because the pet is vaccinated and the adopter is eligible
         System.out.println(newApplicationCreated.isAllowedToAdopt());
         Application georgeApplication=georgeAdopter.createApplication(pets.get(0));
         //expect false because the person is a minor and hence the points would not qualify
         System.out.println(georgeApplication.isAllowedToAdopt());
+        //test the staff fail-safe (expect false because staff cannot force approve an ineligible application)
+        ArrayList<Application> testApplications=new ArrayList<Application>();
+        testApplications.add(georgeApplication);
+        System.out.println(defaultStaff.approveAdoption(georgeApplication, true, testApplications));
+        //expect REJECTED because the fail-safe blocked it
+        System.out.println(georgeApplication.getApprovalStatus());
+        //test competing applications (expect true because John's application is valid and gets approved)
+        Application fredApplication=fredAdopter.createApplication(pets.get(0));
+        testApplications.add(fredApplication);
+        testApplications.add(newApplicationCreated);
+        System.out.println(defaultStaff.approveAdoption(newApplicationCreated, true, testApplications));
+        //expect APPROVED for John
+        System.out.println(newApplicationCreated.getApprovalStatus());
+        //expect REJECTED for Fred because John already adopted the pet (competing application)
+        System.out.println(fredApplication.getApprovalStatus());
+        //expect true because the pet is now adopted
+        System.out.println(pets.get(0).isAdopted());
+    }
+    public static void thirdUnitTest(){
+        System.out.println("Third unit test");
+        Pet firstPet=new Pet("Karel", 8, "German Shepard Dog");
+        Pet secondPet=new Pet("Joanna", 5, "Brown Cat");
+        Adopter johnAdopter=new Adopter("John", 45, "Villa", "johnplayswhat");
+        Adopter fredAdopter=new Adopter("Fred", 19, "Apartment", "fredplayswhat");
+        //test the equals methods for Pet and Adopter
+        //expect true because it is the exact same object reference
+        System.out.println(firstPet.equals(firstPet));
+        //expect false because they have different names, ages, types, and IDs
+        System.out.println(firstPet.equals(secondPet));
+        //expect true because it is the exact same object reference
+        System.out.println(johnAdopter.equals(johnAdopter));
+        //expect false because they have different names, ages, home types, and passwords
+        System.out.println(johnAdopter.equals(fredAdopter));
+        //test the equals method for Application
+        Application johnApplication=johnAdopter.createApplication(firstPet);
+        Application newJohnApplication=johnAdopter.createApplication(firstPet);
+        //expect true because they belong to the same adopter and are for the same pet
+        System.out.println(johnApplication.equals(newJohnApplication));
+        //test staff manually rejecting a valid application
+        Staff defaultStaff=new Staff("Staff", "StaffPassword");
+        ArrayList<Application> testApplications=new ArrayList<Application>();
+        defaultStaff.changePetStatus(firstPet, true, false);
+        testApplications.add(johnApplication);
+        //expect true because the method executes successfully
+        System.out.println(defaultStaff.approveAdoption(johnApplication, false, testApplications));
+        //expect REJECTED because staff manually rejected it
+        System.out.println(johnApplication.getApprovalStatus());
+        //expect false because the pet was not adopted
+        System.out.println(firstPet.isAdopted());
+        //test applying for an already adopted pet
+        secondPet.setAdopted(true);
+        Application fredApplication=fredAdopter.createApplication(secondPet);
+        //expect false because the pet is already adopted
+        System.out.println(fredApplication.isAllowedToAdopt());
+    }
+    public static void fourthUnitTest(){
+        System.out.println("Fourth unit test");
+        Adopter maximumScoreAdopter=new Adopter("Maximum", 35, "Townhouse", "maximumplayswhat");
+        maximumScoreAdopter.addPet(new Pet("First", 1, "Dog"));
+        Adopter minimumScoreAdopter=new Adopter("Minimum", 17, "House", "minimumplayswhat");
+        Pet testPet=new Pet("Karel", 8, "German Shepard Dog");
+        testPet.setVaccinated(true);
+        Application maximumApplication=maximumScoreAdopter.createApplication(testPet);
+        Application minimumApplication=minimumScoreAdopter.createApplication(testPet);
+        //expect 75 (25 for having a pet +25 for townhouse +25 for age 18-35)
+        System.out.println(maximumApplication.getRecommendationScore());
+        //expect 25 (10 for no pets +10 for house +5 for age under 18)
+        System.out.println(minimumApplication.getRecommendationScore());
+        Staff defaultStaff=new Staff("Staff", "StaffPassword");
+        ArrayList<Application> testApplications=new ArrayList<Application>();
+        testApplications.add(maximumApplication);
+        testApplications.add(minimumApplication);
+        //staff tries to approve the minimum score adopter, and this expects false because score is below 50
+        System.out.println(defaultStaff.approveAdoption(minimumApplication, true, testApplications));
+        //expect REJECTED because the fail-safe blocked it
+        System.out.println(minimumApplication.getApprovalStatus());
+        //staff approves the maximum score adopter
+        //expect true because score is above 50 and pet is vaccinated
+        System.out.println(defaultStaff.approveAdoption(maximumApplication, true, testApplications));
+        //expect APPROVED because of the previous approveAdoption method
+        System.out.println(maximumApplication.getApprovalStatus());
+        //expect true because pet is now adopted
+        System.out.println(testPet.isAdopted());
     }
     public static void staffActions(Staff defaultStaff){
         while (true){
@@ -256,6 +340,8 @@ public class Main{
         ArrayList<Pet> pets=new ArrayList<Pet>();
         firstUnitTest();
         secondUnitTest();
+        thirdUnitTest();
+        fourthUnitTest();
         pets.add(new Pet("Karel", 8, "German Shepard Dog"));
         pets.add(new Pet("William", 4, "Labrador Dog"));
         pets.add(new Pet("Joanna", 5, "Brown Cat"));

@@ -1,0 +1,43 @@
+"C:\Program Files\Java\jdk-25\bin\java.exe" "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2025.3.2\lib\idea_rt.jar=54834" -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath C:\Users\rjian\Desktop\PetAdoption\out\production\PetAdoption Main
+First unit test
+ID: 1001	Name: Karel	Age: 8	Type: German Shepard Dog	Vaccinated: false	Adopted: false
+ID: 1002	Name: William	Age: 4	Type: Labrador Dog	Vaccinated: false	Adopted: false
+ID: 1003	Name: Joanna	Age: 5	Type: Brown Cat	Vaccinated: false	Adopted: false
+
+After setter method setting vaccination and adoption:
+ID: 1001	Name: Karel	Age: 8	Type: German Shepard Dog	Vaccinated: true	Adopted: true
+Second unit test
+ID: 1005	Name: William	Age: 4	Type: Labrador Dog	Vaccinated: false	Adopted: false
+ID: 1006	Name: Joanna	Age: 5	Type: Brown Cat	Vaccinated: false	Adopted: false
+[PENDING] adopter John (age 45) with a home type of Villa with 2 pets adopted wants to adopt pet Karel (ID 1004, age 8, German Shepard Dog, is not vaccinated, is not adopted)
+false
+true
+false
+false
+REJECTED
+Application approved.
+Conflicting application from Fred automatically rejected.
+true
+APPROVED
+REJECTED
+true
+Third unit test
+true
+false
+true
+false
+true
+Application rejected by staff.
+true
+REJECTED
+false
+false
+Fourth unit test
+75
+25
+false
+REJECTED
+Application approved.
+true
+APPROVED
+true
