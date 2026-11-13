@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class Main{
     public static ArrayList<Application> allApplications=new ArrayList<Application>();
     public static void firstUnitTest(){
-                //First Unit Test
+//        First Unit Test
         System.out.println("First unit test");
         ArrayList<Pet> pets=new ArrayList<Pet>();
         pets.add(new Pet("Karel", 8, "German Shepard Dog"));
@@ -37,8 +37,14 @@ public class Main{
             //ID: 1003	Name: Joanna	Age: 5	Type: Brown CatVaccinated: false	Adopted: false
             System.out.println(pet);
         }
+        //proves the setter methods work as intended to update the values
+        pets.get(0).setVaccinated(true);
+        pets.get(0).setAdopted(true);
+        System.out.println("\nAfter setter method setting vaccination and adoption: ");
+        System.out.println(pets.get(0));
     }
     public static void secondUnitTest(){
+        System.out.println("Second unit test");
         ArrayList<Pet> pets=new ArrayList<>();
         pets.add(new Pet("Karel", 8, "German Shepard Dog"));
         pets.add(new Pet("William", 4, "Labrador Dog"));
@@ -47,6 +53,7 @@ public class Main{
         defaultStaff.addPets(pets);
         Adopter johnAdopter=new Adopter("John", 45, "Villa", "johnplayswhat");
         Adopter fredAdopter=new Adopter("Fred", 19, "Apartment", "fredplayswhat");
+        Adopter georgeAdopter=new Adopter("George", 15, "Tent", "georgeplayswhat");
         johnAdopter.addPet(pets.get(1));
         johnAdopter.addPet(pets.get(2));
         //same output as the output in the first unit test, which suggests that the adopter is able to hold/adopt animals properly
@@ -59,6 +66,14 @@ public class Main{
         //ID: 1003	Name: Joanna	Age: 5	Type: Brown CatVaccinated: false	Adopted: false
         //adopter John (age 45) with a home type of Villa with 3 pets adopted wants to adopt pet Karel with ID 1001, an age of 8, a type of German Shepard Dog, and is not vaccinated
         System.out.println(newApplicationCreated);
+        //test recommendation status for the adoption (expect false in this case because it is not vaccinated)
+        System.out.println(newApplicationCreated.isAllowedToAdopt());
+        defaultStaff.changePetStatus(pets.get(0), true, false);
+        //test recommendation status for the adoption (expect true in this case, as the pet is vaccinated)
+        System.out.println(newApplicationCreated.isAllowedToAdopt());
+        Application georgeApplication=georgeAdopter.createApplication(pets.get(0));
+        //expect false because the person is a minor and hence the points would not qualify
+        System.out.println(georgeApplication.isAllowedToAdopt());
     }
     public static void staffActions(Staff defaultStaff){
         while (true){
@@ -239,8 +254,8 @@ public class Main{
     }
     public static void main(String[] arg){
         ArrayList<Pet> pets=new ArrayList<Pet>();
-//        firstUnitTest();
-//        secondUnitTest();
+        firstUnitTest();
+        secondUnitTest();
         pets.add(new Pet("Karel", 8, "German Shepard Dog"));
         pets.add(new Pet("William", 4, "Labrador Dog"));
         pets.add(new Pet("Joanna", 5, "Brown Cat"));
