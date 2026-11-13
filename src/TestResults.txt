@@ -1,4 +1,4 @@
-"C:\Program Files\Java\jdk-25\bin\java.exe" "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2025.3.2\lib\idea_rt.jar=54834" -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath C:\Users\rjian\Desktop\PetAdoption\out\production\PetAdoption Main
+"C:\Program Files\Java\jdk-25\bin\java.exe" "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2025.3.2\lib\idea_rt.jar=57883" -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath C:\Users\rjian\Desktop\PetAdoption\out\production\PetAdoption Main
 First unit test
 ID: 1001	Name: Karel	Age: 8	Type: German Shepard Dog	Vaccinated: false	Adopted: false
 ID: 1002	Name: William	Age: 4	Type: Labrador Dog	Vaccinated: false	Adopted: false
@@ -9,7 +9,7 @@ ID: 1001	Name: Karel	Age: 8	Type: German Shepard Dog	Vaccinated: true	Adopted: t
 Second unit test
 ID: 1005	Name: William	Age: 4	Type: Labrador Dog	Vaccinated: false	Adopted: false
 ID: 1006	Name: Joanna	Age: 5	Type: Brown Cat	Vaccinated: false	Adopted: false
-[PENDING] adopter John (age 45) with a home type of Villa with 2 pets adopted wants to adopt pet Karel (ID 1004, age 8, German Shepard Dog, is not vaccinated, is not adopted)
+[PENDING] (Fri Nov 13 18:47:42 CST 2026) adopter John (age 45) with a home type of Villa with 2 pets adopted wants to adopt pet Karel (ID 1004, age 8, German Shepard Dog, is not vaccinated, is not adopted)
 false
 true
 false
