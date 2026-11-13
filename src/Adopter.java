@@ -1,3 +1,8 @@
+/*
+    The Adopter class containing attributes and behaviors concerning Adopters and their performable actions
+    By Richard Jiang
+    2026/11/13
+ */
 import java.util.ArrayList;
 
 public class Adopter{

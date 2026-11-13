@@ -1,3 +1,8 @@
+/*
+    The Application class created/changed by the Adopter and the Staff class as a structural way of storing adoption application queue entires and more
+    By Richard Jiang
+    2026/11/13
+ */
 import java.util.Date;
 
 public class Application{

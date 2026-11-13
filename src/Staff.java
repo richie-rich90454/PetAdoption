@@ -1,3 +1,8 @@
+/*
+    The Staff class with attributes and behaviors regarding the staff and their completable actions
+    By Richard Jiang
+    2026/11/13
+ */
 import java.util.ArrayList;
 
 public class Staff{

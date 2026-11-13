@@ -1,3 +1,8 @@
+/*
+    The Pet class that contains attributes and performable actions (behaviors etc.) regarding the pets that could be adopted, vaccinated etc.
+    By Richard Jiang
+    2026/11/13
+ */
 public class Pet {
     private String name;
     private int age;

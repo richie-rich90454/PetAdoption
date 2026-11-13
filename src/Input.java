@@ -1,3 +1,8 @@
+/*
+    The helper Input class used for secure inputs
+    By Richard Jiang
+    2026/11/13
+ */
 import java.util.Scanner;
 public class Input{
     public static Scanner input=new Scanner(System.in);
