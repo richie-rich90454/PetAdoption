@@ -167,6 +167,11 @@ public class Main{
                         petExists=true;
                         if (!pet.isAdopted()&&pet.isVaccinated()){
                             Application newApplication=currentAdopter.createApplication(pet);
+                            for (Application application: allApplications){
+                                if (application.getAdopter().equals(currentAdopter)&&application.getPet().equals(pet)){
+                                    System.out.println("Cannot submit an application for the same pet twice.");
+                                }
+                            }
                             allApplications.add(newApplication);
                             System.out.println("Application submitted for "+pet.getName()+". Waiting for staff review and approval.");
                         }

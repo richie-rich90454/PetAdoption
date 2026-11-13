@@ -33,8 +33,16 @@ public class Pet {
     public int getId(){
         return id;
     }
-    public boolean equals(Pet otherPet){
-        return this.name.equals(otherPet.name)&&this.age==otherPet.age&&this.type.equals(otherPet.type)&&this.id==otherPet.id;
+    @Override
+    public boolean equals(Object object){
+        if (this==object){
+            return true;
+        }
+        if (object==null||object.getClass()!=this.getClass()){
+            return false;
+        }
+        Pet otherPet=(Pet)object;
+        return otherPet.name.equals(this.name)&&otherPet.age==this.age&&otherPet.type.equals(this.type)&&this.id==otherPet.id;
     }
     public String toString(){
         String petReturnString="ID: "+this.getId()+"\tName: "+this.getName()+"\tAge: "+this.getAge()+"\tType: "+this.getType();

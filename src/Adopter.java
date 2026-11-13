@@ -34,8 +34,16 @@ public class Adopter{
     public Application createApplication(Pet petChosen){
         return new Application(this, petChosen);
     }
-    public boolean equals(Adopter adopter){
-        return this.adoptedPets.equals(adopter.adoptedPets)&&this.age==adopter.age&&this.homeType.equals(adopter.homeType)&&this.password.equals(adopter.password);
+    @Override
+    public boolean equals(Object object){
+        if (this==object){
+            return true;
+        }
+        if (object==null||object.getClass()!=this.getClass()){
+            return false;
+        }
+        Adopter otherAdopter=(Adopter) object;
+        return otherAdopter.name.equals(this.name)&&otherAdopter.getAdoptedPets().equals(this.adoptedPets)&&otherAdopter.age==this.age&&otherAdopter.homeType.equals(this.homeType)&&otherAdopter.password.equals(this.password);
     }
     public String toString(){
         return name+" (age "+age+") with a home type of "+homeType+" with "+adoptedPets.size()+" pets adopted";
