@@ -1,11 +1,16 @@
+import java.util.Date;
+
 public class Application{
     private Adopter adopter;
     private Pet pet;
     private String approvalStatus;
+    private String submissionDate;
     public Application(Adopter adopter, Pet pet){
         this.adopter=adopter;
         this.pet=pet;
         approvalStatus="PENDING";
+        //reference: https://www.geeksforgeeks.org/java/date-tostring-method-in-java-with-examples/
+        this.submissionDate=new Date().toString();
     }
     public void setApprovalStatus(String approvalStatus){
         this.approvalStatus=approvalStatus;
@@ -19,6 +24,9 @@ public class Application{
     public Adopter getAdopter(){
         return adopter;
     }
+    public String getSubmissionDate(){
+        return submissionDate;
+    }
     @Override
     public boolean equals(Object object){
         if (this==object){
@@ -31,7 +39,7 @@ public class Application{
         return (pet.equals(otherApplication.pet)&&adopter.equals(otherApplication.adopter));
     }
     public String toString(){
-        String adopterMessage="["+approvalStatus+"] adopter "+adopter.toString()+" wants to adopt pet "+pet.getName()+" (ID "+pet.getId()+", age "+pet.getAge()+", "+pet.getType();
+        String adopterMessage="["+approvalStatus+"] ("+submissionDate+") adopter "+adopter.toString()+" wants to adopt pet "+pet.getName()+" (ID "+pet.getId()+", age "+pet.getAge()+", "+pet.getType();
         if (pet.isVaccinated()){
             adopterMessage+=", is vaccinated";
         }

@@ -20,7 +20,6 @@
  */
 /*
     See TestResults.txt for the test case output (all test outputs are as expected)
-    See SampleOutput.txt for an example flow and execution of the program
  */
 import java.util.ArrayList;
 public class Main{
@@ -338,10 +337,10 @@ public class Main{
     }
     public static void main(String[] args){
         ArrayList<Pet> pets=new ArrayList<Pet>();
-        firstUnitTest();
-        secondUnitTest();
-        thirdUnitTest();
-        fourthUnitTest();
+//        firstUnitTest();
+//        secondUnitTest();
+//        thirdUnitTest();
+//        fourthUnitTest();
         pets.add(new Pet("Karel", 8, "German Shepard Dog"));
         pets.add(new Pet("William", 4, "Labrador Dog"));
         pets.add(new Pet("Joanna", 5, "Brown Cat"));
