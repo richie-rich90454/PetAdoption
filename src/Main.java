@@ -1,7 +1,21 @@
+/*
+    The Main class of the overall project that has the entrypoint main function that is the entrypoint for user input, creating Pet, Adopter, Application, and Staff objects, and calling instance methods from those objects or static methods from the Input class (for input handling and validation) to make the program able to start and be functional
+    By Richard Jiang
+    2026/11/13
+ */
+/*
+    Reflection Questions:
+    1.	Design Insight: Which rule was hardest to encode in code — and why? How did you ensure it was enforced consistently?
+        The rule that was the hardest to follow is the requirement of encapsulation, and this project does indeed not perfectly follow it, as it uses a significant number of call-by-reference operations, such as the passing around of the ArrayLists for the contents to be modified in other methods through changing the object at the passed in memory address. This rule is not perfectly followed and is hence the hardest to follow because call-by-reference does dramatically simplify the difficulty and the amount of code required in the program for the code to be functional in the given short development time, so it is essentially a tradeoff between development requirement time and the security and encapsulation of the code. The project would be much harder to achieve and fulfill if call-by-reference was not used, and it would likely take multitudes more time and effort that would not be applicable given the time limit. However, in terms of other places, encapsulation is enforced rather well, especially with primitive data types, and they are often enforced with limiting the ability of setters to update values (by directly not implementing some setter methods to make certain fields/instance methods effectively immutable outside of the class it has) or guarding the acceptable values assigned with the setter methods, which makes those data fields have controlled access and controlled mutation.
+    2.	Encapsulation Check: Name one piece of data that only one class should control. How did you prevent other classes/users from changing it directly?
+        One piece of data that only one class should control is the name and age values of the Pet and Adopter classes, as that is critical (especially the latter) in determining the viability of adoption and is a crucial determining factor in the recommendation algorithm, so its mutation should only be handled by the respective classes to prevent issues. To address this requirement, the name and age values are set to be immutable (only getter methods created, and there are no setter methods) so that the values would not be changeable by outside classes through methods and is only changeable within the class.
+    3.	Trust Through Design: If a staff member or adopter makes a mistake (e.g., tries to adopt an unvaccinated pet), how does your system respond? Why is this kind of “fail-safe” behavior important in real software?
+        Cases like the adoption of an unvaccinated pet are initially prevented by not displaying unadoptable (from reasons like them being already adopted or being unvaccinated) pets in the user select menu, so the user would not know of them and would likely not be able to enter in the ID of them to adopt them. However, even if the user entered an ID of the non-adoptable pet, the system would refuse the application submission and not create an application as well as throw the reason to the user. Even if some unfound error allows the adoption of such pets and has an application filed, the staff would not be able to approve the application with the system throwing the reason. These multiple fail-safe safeguards ensure the software is fully versatile in all cases, and it could almost fully prevent such issues from ever occuring. Similar measures are also implemented for other situations as well.
+ */
 import java.util.ArrayList;
 
 public class Main{
-    public static ArrayList<Application> allApplications =new ArrayList<Application>();
+    public static ArrayList<Application> allApplications=new ArrayList<Application>();
     public static void firstUnitTest(){
         //        //First Unit Test
         ArrayList<Pet> pets=new ArrayList<Pet>();
