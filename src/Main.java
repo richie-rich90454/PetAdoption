@@ -336,7 +336,7 @@ public class Main{
             }
         }
     }
-    public static void main(String[] arg){
+    public static void main(String[] args){
         ArrayList<Pet> pets=new ArrayList<Pet>();
         firstUnitTest();
         secondUnitTest();
