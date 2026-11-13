@@ -57,8 +57,11 @@ public class Main{
     }
     public static void staffActions(Staff defaultStaff){
         while (true){
-            System.out.print("Please enter your password: ");
+            System.out.print("Please enter your password (enter \"quit\" to exit to login): ");
             String userPassword=Input.safeStringInput();
+            if (userPassword.toLowerCase().trim().equals("quit")){
+                return;
+            }
             if (userPassword.equals(defaultStaff.getPassword())){
                 break;
             }
@@ -129,14 +132,23 @@ public class Main{
     public static void adopterActions(ArrayList<Adopter> adopters, Staff defaultStaff){
         Adopter currentAdopter=null;
         while (true){
-            System.out.print("Please enter your username: ");
+            System.out.print("Please enter your username (enter \"quit\" to return to login): ");
             String username=Input.safeStringInput().toLowerCase();
+            if (username.toLowerCase().trim().equals("quit")){
+                return;
+            }
             boolean adopterExists=false;
             for (Adopter adopter: adopters){
                 if (adopter.getName().toLowerCase().equals(username)){
-                    System.out.print("Please enter your password: ");
+                    System.out.print("Please enter your password (enter \"quit\" to return to login): ");
                     String userPassword=Input.safeStringInput();
+                    if (userPassword.toLowerCase().trim().equals("quit")){
+                        return;
+                    }
                     while (!userPassword.equals(adopter.getPassword())){
+                        if (userPassword.toLowerCase().trim().equals("quit")){
+                            return;
+                        }
                         System.out.print("Wrong Password. Please enter again: ");
                         userPassword=Input.safeStringInput();
                     }
@@ -183,13 +195,18 @@ public class Main{
                         petExists=true;
                         if (!pet.isAdopted()&&pet.isVaccinated()){
                             Application newApplication=currentAdopter.createApplication(pet);
+                            boolean hasApplicationBefore=false;
                             for (Application application: allApplications){
-                                if (application.getAdopter().equals(currentAdopter)&&application.getPet().equals(pet)){
+                                if (application.getAdopter().equals(currentAdopter)&&application.getPet().equals(pet)&&application.getApprovalStatus().equals("PENDING")){
                                     System.out.println("Cannot submit an application for the same pet twice.");
+                                    hasApplicationBefore=true;
+                                    break;
                                 }
                             }
-                            allApplications.add(newApplication);
-                            System.out.println("Application submitted for "+pet.getName()+". Waiting for staff review and approval.");
+                            if (!hasApplicationBefore){
+                                allApplications.add(newApplication);
+                                System.out.println("Application submitted for "+pet.getName()+". Waiting for staff review and approval.");
+                            }
                         }
                         else{
                             System.out.println("The pet is not available for adoption because it is not vaccinated or is already adopted.");
